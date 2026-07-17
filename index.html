@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>XI F4 - SMAN 2 Enok</title>
     <style>
         /* ===== RESET ===== */
@@ -12,22 +12,23 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        html, body {
+            width: 100%;
             min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c2340, #1a4a7a, #2e6db4);
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0c2340, #1a4a7a, #2e6db4);
-            padding: 20px;
+            padding: 15px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* ===== EFK BINTANG (animasi background) ===== */
+        /* ===== EFK BINTANG ===== */
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -56,7 +57,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 40px;
-            padding: 50px 60px;
+            padding: clamp(30px, 6vw, 60px);
             max-width: 750px;
             width: 100%;
             text-align: center;
@@ -68,14 +69,17 @@
 
         /* ===== LOGO ===== */
         .logo {
-            width: 180px;
-            height: 180px;
+            width: clamp(120px, 25vw, 180px);
+            height: clamp(120px, 25vw, 180px);
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
+            margin-bottom: clamp(12px, 2vw, 20px);
             transition: 0.3s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .logo:hover {
@@ -86,26 +90,29 @@
         /* ===== TEKS ===== */
         .judul {
             color: white;
-            font-size: 36px;
+            font-size: clamp(24px, 5vw, 42px);
             font-weight: 800;
             letter-spacing: 2px;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+            word-break: break-word;
         }
 
         .subjudul {
             color: rgba(255, 255, 255, 0.85);
-            font-size: 22px;
+            font-size: clamp(16px, 3vw, 26px);
             font-weight: 300;
-            letter-spacing: 6px;
+            letter-spacing: clamp(3px, 1vw, 8px);
             margin-top: 4px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            word-break: break-word;
         }
 
         .garis {
-            width: 80px;
+            width: clamp(60px, 10vw, 100px);
             height: 3px;
             background: linear-gradient(90deg, transparent, #fdcb6e, transparent);
-            margin: 18px auto;
+            margin: clamp(14px, 2vw, 22px) auto;
             border-radius: 10px;
         }
 
@@ -113,27 +120,29 @@
         .tombol-group {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin-top: 30px;
+            gap: clamp(10px, 1.5vw, 16px);
+            margin-top: clamp(20px, 3vw, 34px);
         }
 
         .tombol {
-            padding: 16px 20px;
+            padding: clamp(14px, 2vw, 20px) clamp(12px, 1.5vw, 24px);
             border: none;
-            border-radius: 16px;
-            font-size: 18px;
+            border-radius: clamp(14px, 1.5vw, 20px);
+            font-size: clamp(14px, 2vw, 20px);
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: clamp(6px, 1vw, 12px);
             background: rgba(255, 255, 255, 0.12);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             text-decoration: none;
+            min-height: clamp(50px, 8vw, 70px);
+            width: 100%;
         }
 
         .tombol:hover {
@@ -147,13 +156,12 @@
             transform: translateY(-2px) scale(0.97);
         }
 
-        /* Warna spesifik tombol */
         .tombol.anggota {
             grid-column: span 2;
             background: rgba(253, 203, 110, 0.2);
             border-color: rgba(253, 203, 110, 0.3);
-            font-size: 20px;
-            padding: 18px;
+            font-size: clamp(16px, 2.2vw, 22px);
+            padding: clamp(16px, 2vw, 22px);
         }
 
         .tombol.anggota:hover {
@@ -176,38 +184,29 @@
             border-color: #2ecc71;
         }
 
-        /* Icon di tombol */
         .icon {
-            font-size: 24px;
+            font-size: clamp(18px, 2.5vw, 28px);
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            margin-top: 30px;
+            margin-top: clamp(20px, 3vw, 34px);
             color: rgba(255, 255, 255, 0.3);
-            font-size: 13px;
+            font-size: clamp(11px, 1.2vw, 14px);
             letter-spacing: 1px;
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
+        /* HP kecil (di bawah 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+                align-items: center;
+            }
+
             .container {
-                padding: 30px 25px;
+                padding: 25px 18px;
                 border-radius: 28px;
-            }
-
-            .logo {
-                width: 130px;
-                height: 130px;
-            }
-
-            .judul {
-                font-size: 26px;
-            }
-
-            .subjudul {
-                font-size: 16px;
-                letter-spacing: 3px;
             }
 
             .tombol-group {
@@ -215,29 +214,111 @@
                 gap: 10px;
             }
 
-            .tombol {
-                font-size: 15px;
-                padding: 14px 12px;
-            }
-
             .tombol.anggota {
                 grid-column: span 2;
-                font-size: 17px;
-                padding: 16px;
-            }
-
-            .icon {
-                font-size: 20px;
             }
         }
 
-        @media (max-width: 400px) {
+        /* HP sangat kecil (di bawah 380px) */
+        @media (max-width: 380px) {
+            .container {
+                padding: 20px 14px;
+                border-radius: 22px;
+            }
+
             .tombol-group {
                 grid-template-columns: 1fr;
+                gap: 10px;
             }
 
             .tombol.anggota {
                 grid-column: span 1;
+            }
+
+            .tombol {
+                padding: 14px;
+                font-size: 15px;
+                min-height: 48px;
+            }
+        }
+
+        /* Landscape HP (miring) */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 10px 20px;
+                align-items: center;
+            }
+
+            .container {
+                padding: 20px 30px;
+                border-radius: 24px;
+                max-width: 600px;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 10px;
+            }
+
+            .judul {
+                font-size: 20px;
+            }
+
+            .subjudul {
+                font-size: 14px;
+                letter-spacing: 3px;
+            }
+
+            .garis {
+                margin: 8px auto;
+                width: 50px;
+            }
+
+            .tombol-group {
+                margin-top: 14px;
+                gap: 8px;
+            }
+
+            .tombol {
+                padding: 10px 14px;
+                font-size: 13px;
+                min-height: 40px;
+            }
+
+            .tombol.anggota {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .icon {
+                font-size: 16px;
+            }
+
+            .footer {
+                margin-top: 12px;
+                font-size: 10px;
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                max-width: 550px;
+                padding: 45px 50px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        /* Komputer / Layar besar */
+        @media (min-width: 1025px) {
+            .container {
+                max-width: 750px;
+                padding: 55px 65px;
             }
         }
     </style>
@@ -255,28 +336,20 @@
 
         <!-- ===== TOMBOL ===== -->
         <div class="tombol-group">
-            <!-- Anggota (lebar 2 kolom) -->
             <a href="anggota.html" class="tombol anggota">
                 <span class="icon">👥</span> Anggota
             </a>
-
-            <!-- Cowok -->
             <a href="cowok.html" class="tombol cowok">
                 <span class="icon">👦</span> Cowok
             </a>
-
-            <!-- Cewek -->
             <a href="cewek.html" class="tombol cewek">
                 <span class="icon">👧</span> Cewek
             </a>
-
-            <!-- Bareng -->
             <a href="bareng.html" class="tombol bareng">
                 <span class="icon">👫</span> Bareng
             </a>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <p class="footer">✨ Kelas XI F4 ✨</p>
     </div>
 
