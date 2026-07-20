@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Anggota Kelas - XI F4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0c2340, #1a4a7a, #2e6db4);
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(2px 2px at 50px 160px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(2px 2px at 90px 40px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.4), transparent);
+            background-size: 200px 200px;
+            animation: bintang 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes bintang {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 40px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .header h1 {
+            color: white;
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 800;
+        }
+        .header h1 span {
+            color: #fdcb6e;
+        }
+        .btn-kembali {
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-kembali:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stats-item {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 22px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .stats-item span {
+            font-weight: 800;
+            color: #fdcb6e;
+            font-size: 18px;
+        }
+        .daftar-siswa {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 550px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .daftar-siswa::-webkit-scrollbar {
+            width: 6px;
+        }
+        .daftar-siswa::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .daftar-siswa::-webkit-scrollbar-thumb {
+            background: rgba(253, 203, 110, 0.4);
+            border-radius: 10px;
+        }
+        .daftar-siswa::-webkit-scrollbar-thumb:hover {
+            background: rgba(253, 203, 110, 0.6);
+        }
+        .siswa-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+        .siswa-card:hover {
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateX(8px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        .siswa-card .no-absen {
+            background: rgba(253, 203, 110, 0.2);
+            color: #fdcb6e;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            min-width: 36px;
+            text-align: center;
+            border: 1px solid rgba(253, 203, 110, 0.2);
+        }
+        .siswa-card .avatar {
+            font-size: clamp(28px, 4vw, 36px);
+            line-height: 1;
+        }
+        .siswa-card .nama {
+            font-size: clamp(15px, 2vw, 18px);
+            font-weight: 600;
+            flex: 1;
+        }
+        .siswa-card .arrow {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 20px;
+            transition: 0.3s;
+        }
+        .siswa-card:hover .arrow {
+            color: rgba(255, 255, 255, 0.7);
+            transform: translateX(4px);
+        }
+        .info-scroll {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            margin-top: 18px;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 25px 18px; border-radius: 28px; }
+            .header { flex-direction: column; text-align: center; }
+            .siswa-card { padding: 12px 16px; gap: 12px; }
+            .siswa-card .no-absen { min-width: 30px; font-size: 12px; padding: 3px 10px; }
+            .stats { gap: 10px; }
+            .stats-item { font-size: 12px; padding: 8px 16px; }
+        }
+        @media (max-width: 400px) {
+            .container { padding: 18px 12px; border-radius: 20px; }
+            .siswa-card { padding: 10px 12px; gap: 10px; border-radius: 12px; }
+            .siswa-card .nama { font-size: 13px; }
+            .siswa-card .avatar { font-size: 24px; }
+            .daftar-siswa { max-height: 400px; }
+        }
+        @media (max-height: 500px) and (orientation: landscape) {
+            .container { padding: 18px 25px; border-radius: 24px; }
+            .header { margin-bottom: 15px; }
+            .header h1 { font-size: 20px; }
+            .stats { margin-bottom: 12px; }
+            .stats-item { font-size: 11px; padding: 5px 14px; }
+            .daftar-siswa { max-height: 250px; gap: 6px; }
+            .siswa-card { padding: 8px 14px; gap: 10px; }
+            .siswa-card .avatar { font-size: 20px; }
+            .siswa-card .nama { font-size: 13px; }
+            .siswa-card .no-absen { font-size: 11px; padding: 2px 8px; min-width: 28px; }
+            .info-scroll { margin-top: 10px; font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👥 <span>Anggota</span> XI F4</h1>
+            <a href="index.html" class="btn-kembali">⬅ Kembali</a>
+        </div>
+        <div class="stats">
+            <div class="stats-item">👦 Putra <span id="jmlPutra">0</span></div>
+            <div class="stats-item">👧 Putri <span id="jmlPutri">0</span></div>
+            <div class="stats-item">📚 Total <span id="jmlTotal">0</span></div>
+        </div>
+        <div class="daftar-siswa" id="daftarSiswa"></div>
+        <p class="info-scroll">⬇ Scroll untuk lihat semua anggota</p>
+    </div>
+    <script>
+        const siswa = [
+            { id: 1, nama: 'ADE SUBAGYO', panggilan: 'Gyo', jk: 'Putra', hobi: 'Renang, joging, voli', motto: 'Jangan pernah menyerah sebelum mencoba', emoji: '👦' },
+            { id: 2, nama: 'ADINDA RAMONA SARI', panggilan: 'Mona', jk: 'Putri', hobi: 'Drawing dan dance', motto: 'Jadilah versi terbaik dari dirimu sendiri', emoji: '👧' },
+            { id: 3, nama: 'ALFIN JUANDA SAPUTRA', panggilan: 'Alpin', jk: 'Putra', hobi: 'Touring', motto: 'Mimpi tidak akan menjadi kenyataan tanpa kerja keras', emoji: '👦' },
+            { id: 4, nama: 'AULIA ZAHRA', panggilan: 'Zahra', jk: 'Putri', hobi: 'Futsal, voli', motto: 'Kamu lebih kuat dari yang kamu kira', emoji: '👧' },
+            { id: 5, nama: 'CINTA SYAFIKA PUTRI', panggilan: 'Cinta', jk: 'Putri', hobi: 'Main sepeda', motto: 'Kegagalan adalah awal dari kesuksesan', emoji: '👧' },
+            { id: 6, nama: 'DAFFA HABIBIE ZIKRILLAH', panggilan: 'Daffa', jk: 'Putra', hobi: 'Futsal', motto: 'Percaya pada proses', emoji: '👦' },
+            { id: 7, nama: 'DINDA NOVIRA', panggilan: 'Dinda', jk: 'Putri', hobi: 'Dengar musik', motto: 'Hari ini lebih baik dari kemarin', emoji: '👧' },
+            { id: 8, nama: 'FATHURRAHMAN', panggilan: 'Fatuy', jk: 'Putra', hobi: 'Futsal, voli', motto: 'Sukses adalah milik mereka yang terus berusaha', emoji: '👦' },
+            { id: 9, nama: 'HAIFA AMIRA', panggilan: 'Mira', jk: 'Putri', hobi: 'Futsal, badminton, running', motto: 'Kerja keras hari ini, hasil manis di masa depan', emoji: '👧' },
+            { id: 10, nama: 'HERIAN SABINO', panggilan: 'Iyan', jk: 'Putra', hobi: 'Main game', motto: 'Jangan takut gagal, takutlah untuk tidak mencoba', emoji: '👦' },
+            { id: 11, nama: 'INDRI NURMAYA SUCI', panggilan: 'Indri', jk: 'Putri', hobi: 'Nonton', motto: 'Konsistensi adalah kunci keberhasilan', emoji: '👧' },
+            { id: 12, nama: 'LILA PINTAN NUGRAHI', panggilan: 'Lilac', jk: 'Putri', hobi: 'Masak, jalan-jalan', motto: 'Bermimpilah setinggi langit', emoji: '👧' },
+            { id: 13, nama: 'M. MAULANA FAJRI', panggilan: 'Fajri', jk: 'Putra', hobi: 'Voli', motto: 'Setiap hari adalah kesempatan baru', emoji: '👦' },
+            { id: 14, nama: 'M. RENDRA HIDAYATULLAH', panggilan: 'Rendra/Enda', jk: 'Putra', hobi: 'Voli', motto: 'Jadilah pribadi yang bermanfaat', emoji: '👦' },
+            { id: 15, nama: 'MAHDALENA', panggilan: 'Lena', jk: 'Putri', hobi: 'Main game, badminton', motto: 'Kesuksesan dimulai dari keberanian', emoji: '👧' },
+            { id: 16, nama: 'MELSA PUTRI L', panggilan: 'Melsa', jk: 'Putri', hobi: 'Berkebun', motto: 'Tetaplah rendah hati, tetaplah semangat', emoji: '👧' },
+            { id: 17, nama: 'MUHAMMAD ARDIANSYAH', panggilan: 'Ardi', jk: 'Putra', hobi: 'Futsal, badminton', motto: 'Bukan tentang seberapa cepat, tapi seberapa konsisten', emoji: '👦' },
+            { id: 18, nama: 'MUHAMMAD HANAPI', panggilan: 'Hanapi', jk: 'Putra', hobi: 'Biliar', motto: 'Kamu adalah pahlawan dalam hidupmu sendiri', emoji: '👦' },
+            { id: 19, nama: 'NABIL AUFA SATRIAJI', panggilan: 'Nabil', jk: 'Putra', hobi: 'Tenis meja, golf', motto: 'Hidup adalah tentang memberi makna', emoji: '👦' },
+            { id: 20, nama: 'NABILA RAHMANDA', panggilan: 'Bilbil', jk: 'Putri', hobi: 'Membaca', motto: 'Jangan bandingkan perjalananmu dengan orang lain', emoji: '👧' },
+            { id: 21, nama: 'NABILLA AZZAHRA', panggilan: 'Abil', jk: 'Putri', hobi: 'Baca Al-Qur\'an', motto: 'Jika kamu tidak bisa mengambil risiko, kamu tidak akan pergi ke mana pun', emoji: '👧' },
+            { id: 22, nama: 'NIA RAHMADANI', panggilan: 'Nia', jk: 'Putri', hobi: 'Nonton', motto: 'Setiap langkah kecil itu berarti', emoji: '👧' },
+            { id: 23, nama: 'NUR HAFIZAH HANIF', panggilan: 'Hanif', jk: 'Putri', hobi: 'Nonton, traveling', motto: 'Kebahagiaan adalah ketika kamu memberi', emoji: '👧' },
+            { id: 24, nama: 'NURASSYIFA ARRIZQI', panggilan: 'Syifa', jk: 'Putri', hobi: 'Menggambar', motto: 'Jadilah alasan bagi senyuman orang lain', emoji: '👧' },
+            { id: 25, nama: 'PUTRI NUR ADELIA', panggilan: 'Putri', jk: 'Putri', hobi: 'Masak, buat kue', motto: 'Fokus pada tujuan, bukan hambatan', emoji: '👧' },
+            { id: 26, nama: 'RAMADHANI AGUSTINA', panggilan: 'Hani', jk: 'Putri', hobi: 'Menonton, membaca', motto: 'Yakinlah pada kemampuan diri sendiri', emoji: '👧' },
+            { id: 27, nama: 'REZA OKTA ARIANA', panggilan: 'Eja', jk: 'Putri', hobi: 'Masak (eksperimen)', motto: 'Keberhasilan adalah hasil dari kegigihan', emoji: '👧' },
+            { id: 28, nama: 'RIFATUL AKBAR', panggilan: 'Abay', jk: 'Putra', hobi: 'Futsal', motto: 'Jangan pernah berhenti untuk belajar', emoji: '👦' },
+            { id: 29, nama: 'RIZQI TAUFIQURAHMAN', panggilan: 'Ikyy', jk: 'Putra', hobi: 'Futsal dan sepak bola', motto: 'Percaya bahwa kamu bisa', emoji: '👦' },
+            { id: 30, nama: 'TIARA SAFITRI', panggilan: 'Tiara', jk: 'Putri', hobi: 'Masak', motto: 'Masa depan milik mereka yang berani', emoji: '👧' },
+            { id: 31, nama: 'ULFA AULIA', panggilan: 'Ulfa', jk: 'Putri', hobi: 'Main game, masak', motto: 'Semangat pagi, semangat hidup', emoji: '👧' },
+            { id: 32, nama: 'USMA LUNA', panggilan: 'Lima', jk: 'Putri', hobi: 'Nonton', motto: 'Hidup cuma sekali, lakukan yang terbaik', emoji: '👧' },
+            { id: 33, nama: 'WITA', panggilan: 'Tha', jk: 'Putri', hobi: 'Buat kue', motto: 'Menjadi pribadi yang lebih baik setiap hari', emoji: '👧' },
+            { id: 34, nama: 'ZAHWA SASABILA', panggilan: 'Zahwa', jk: 'Putri', hobi: 'Masak', motto: 'Berbuat baiklah, niscaya kebaikan kembali', emoji: '👧' }
+        ];
+
+        function tampilkanSiswa() {
+            const container = document.getElementById('daftarSiswa');
+            let html = '';
+            siswa.forEach(s => {
+                html += `
+                    <a href="profil.html?id=${s.id}" class="siswa-card">
+                        <span class="no-absen">${s.id}</span>
+                        <span class="avatar">${s.emoji}</span>
+                        <span class="nama">${s.nama}</span>
+                        <span class="arrow">›</span>
+                    </a>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function tampilkanStatistik() {
+            const putra = siswa.filter(s => s.jk === 'Putra').length;
+            const putri = siswa.filter(s => s.jk === 'Putri').length;
+            document.getElementById('jmlPutra').textContent = putra;
+            document.getElementById('jmlPutri').textContent = putri;
+            document.getElementById('jmlTotal').textContent = siswa.length;
+        }
+
+        tampilkanSiswa();
+        tampilkanStatistik();
+    </script>
+</body>
+</html>
