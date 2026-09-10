@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F4 • SMAN 2 Enok</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --blue:#67c9ff;
+    --cyan:#43e6d0;
+    --white:#fff;
+    --muted:rgba(255,255,255,.62);
+}
+
+html,body{
+    min-height:100%;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    padding:22px;
+    overflow:hidden;
+    color:var(--white);
+    background:#061425;
+    position:relative;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at 20% 15%,
+            rgba(55,155,255,.22),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(0,225,205,.14),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #030c18,
+            #0a2340 52%,
+            #04111f
+        );
+    z-index:-3;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    width:520px;
+    height:520px;
+    border:1px solid rgba(103,201,255,.08);
+    border-radius:50%;
+    right:-280px;
+    top:-220px;
+    box-shadow:
+        0 0 0 55px rgba(103,201,255,.025),
+        0 0 0 110px rgba(103,201,255,.018);
+    z-index:-2;
+}
+
+.orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(2px);
+    pointer-events:none;
+    z-index:-1;
+}
+
+.orb.one{
+    width:220px;
+    height:220px;
+    left:-100px;
+    bottom:-80px;
+    background:rgba(0,150,255,.11);
+    animation:drift 8s ease-in-out infinite;
+}
+
+.orb.two{
+    width:160px;
+    height:160px;
+    right:12%;
+    top:8%;
+    background:rgba(0,220,190,.07);
+    animation:drift 10s ease-in-out infinite reverse;
+}
+
+@keyframes drift{
+    50%{
+        transform:translate(22px,-18px);
+    }
+}
+
+/* CARD */
+
+.card{
+    width:min(640px,100%);
+    padding:48px 42px 34px;
+    text-align:center;
+    position:relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.035)
+        );
+
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:34px;
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.48),
+        inset 0 1px 0 rgba(255,255,255,.1);
+
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+
+    animation:enter .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.card:before{
+    content:"";
+    position:absolute;
+    inset:1px;
+    border-radius:33px;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(103,201,255,.12),
+            transparent 35%,
+            rgba(67,230,208,.07)
+        );
+
+    pointer-events:none;
+}
+
+@keyframes enter{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+/* LOGO */
+
+.logo-wrap{
+    width:148px;
+    height:148px;
+    margin:0 auto 25px;
+    position:relative;
+    display:grid;
+    place-items:center;
+}
+
+.logo-wrap:before{
+    content:"";
+    position:absolute;
+    inset:-9px;
+    border-radius:50%;
+    border:1px solid rgba(103,201,255,.32);
+    border-top-color:transparent;
+    animation:spin 10s linear infinite;
+}
+
+.logo-wrap:after{
+    content:"";
+    position:absolute;
+    inset:-17px;
+    border-radius:50%;
+    border:1px dashed rgba(255,255,255,.12);
+    animation:spin 16s linear infinite reverse;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.logo{
+    width:148px;
+    height:148px;
+    object-fit:cover;
+    border-radius:50%;
+
+    border:4px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.38);
+
+    transition:.4s;
+}
+
+.logo:hover{
+    transform:scale(1.04);
+}
+
+/* TITLE */
+
+.kicker{
+    font-size:11px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.45);
+    margin-bottom:8px;
+}
+
+.title{
+    font-size:clamp(30px,7vw,47px);
+    line-height:1.05;
+    letter-spacing:3px;
+    font-weight:850;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #9bdcff,
+            #fff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.class{
+    font-size:19px;
+    letter-spacing:11px;
+    font-weight:700;
+    color:rgba(255,255,255,.66);
+    padding-left:11px;
+    margin-top:9px;
+}
+
+/* DIVIDER */
+
+.divider{
+    width:110px;
+    height:1px;
+    margin:24px auto 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--blue),
+            transparent
+        );
+
+    position:relative;
+}
+
+.divider:after{
+    content:"";
+    position:absolute;
+    width:6px;
+    height:6px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:var(--blue);
+    box-shadow:0 0 16px var(--blue);
+}
+
+/* MENU */
+
+.menu{
+    display:grid;
+    gap:14px;
+}
+
+.btn{
+    min-height:70px;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    text-decoration:none;
+    color:#fff;
+
+    padding:11px 18px;
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;
+
+    background:rgba(255,255,255,.055);
+
+    transition:.35s;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.btn:before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    transform:translateX(-105%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.1),
+            transparent
+        );
+
+    transition:.55s;
+}
+
+.btn:hover:before{
+    transform:translateX(105%);
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+
+    border-color:rgba(255,255,255,.3);
+
+    box-shadow:
+        0 15px 32px rgba(0,0,0,.25);
+}
+
+.btn:active{
+    transform:scale(.98);
+}
+
+/* ICON */
+
+.icon{
+    width:47px;
+    height:47px;
+    flex:0 0 47px;
+
+    border-radius:15px;
+
+    display:grid;
+    place-items:center;
+
+    font-size:22px;
+
+    background:rgba(255,255,255,.09);
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+/* TEXT */
+
+.copy{
+    text-align:left;
+    position:relative;
+    z-index:1;
+}
+
+.copy strong{
+    display:block;
+    font-size:16px;
+}
+
+.copy small{
+    display:block;
+    margin-top:3px;
+    color:rgba(255,255,255,.42);
+    font-size:12px;
+}
+
+.arrow{
+    margin-left:auto;
+    font-size:21px;
+    color:rgba(255,255,255,.42);
+    position:relative;
+    z-index:1;
+}
+
+/* BUTTON COLORS */
+
+.anggota{
+    background:
+        linear-gradient(
+            100deg,
+            rgba(0,150,255,.18),
+            rgba(255,255,255,.035)
+        );
+}
+
+.kegiatan{
+    background:
+        linear-gradient(
+            100deg,
+            rgba(0,210,175,.15),
+            rgba(255,255,255,.035)
+        );
+}
+
+/* QUOTE */
+
+.quote{
+    margin:30px 0 0;
+    padding:22px 10px 0;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    font-size:14px;
+    line-height:1.7;
+
+    color:var(--muted);
+    font-style:italic;
+}
+
+.quote b{
+    font-style:normal;
+    color:#83d5ff;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:22px;
+
+    color:rgba(255,255,255,.3);
+
+    font-size:10px;
+    letter-spacing:3px;
+}
+
+.footer span{
+    color:rgba(120,210,255,.72);
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    body{
+        padding:13px;
+    }
+
+    .card{
+        padding:38px 20px 28px;
+        border-radius:27px;
+    }
+
+    .logo-wrap,
+    .logo{
+        width:122px;
+        height:122px;
+    }
+
+    .title{
+        font-size:29px;
+        letter-spacing:2px;
+    }
+
+    .class{
+        font-size:16px;
+        letter-spacing:8px;
+    }
+
+    .btn{
+        min-height:64px;
+        padding:10px 14px;
+    }
+
+    .icon{
+        width:43px;
+        height:43px;
+        flex-basis:43px;
+    }
+
+    .copy strong{
+        font-size:15px;
+    }
+
+    .copy small{
+        font-size:11px;
+    }
+
+    .quote{
+        font-size:13px;
+    }
+}
+
+/* LANDSCAPE */
+
+@media(
+    max-height:620px
+) and (
+    orientation:landscape
+){
+
+    body{
+        overflow:auto;
+    }
+
+    .card{
+        padding:25px;
+        max-width:570px;
+    }
+
+    .logo-wrap,
+    .logo{
+        width:85px;
+        height:85px;
+    }
+
+    .logo-wrap{
+        margin-bottom:14px;
+    }
+
+    .divider{
+        margin:14px auto 18px;
+    }
+
+    .menu{
+        gap:9px;
+    }
+
+    .btn{
+        min-height:50px;
+    }
+
+    .quote{
+        margin-top:17px;
+        padding-top:13px;
+    }
+
+    .footer{
+        margin-top:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+
+<main class="card">
+
+    <!-- LOGO -->
+    <div class="logo-wrap">
+        <img
+            src="logoutama.jpg"
+            alt="Logo Kelas F4"
+            class="logo"
+        >
+    </div>
+
+    <!-- HEADER -->
+    <div class="kicker">
+        Class Website
+    </div>
+
+    <h1 class="title">
+        SMAN 2 ENOK
+    </h1>
+
+    <div class="class">
+        F4
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- MENU -->
+    <nav class="menu">
+
+        <a
+            href="anggota.html"
+            class="btn anggota"
+        >
+            <span class="icon">
+                👥
+            </span>
+
+            <span class="copy">
+                <strong>
+                    Anggota Kelas
+                </strong>
+
+                <small>
+                    Lihat profil anggota F4
+                </small>
+            </span>
+
+            <span class="arrow">
+                ›
+            </span>
+        </a>
+
+
+        <a
+            href="kegiatan.html"
+            class="btn kegiatan"
+        >
+            <span class="icon">
+                📸
+            </span>
+
+            <span class="copy">
+                <strong>
+                    Dokumentasi Kegiatan
+                </strong>
+
+                <small>
+                    Kenangan dan aktivitas kelas
+                </small>
+            </span>
+
+            <span class="arrow">
+                ›
+            </span>
+        </a>
+
+    </nav>
+
+    <!-- QUOTE -->
+    <div class="quote">
+        “Tiada yang lebih indah dari
+        <b>kebersamaan</b>”
+    </div>
+
+    <!-- FOOTER -->
+    <p class="footer">
+        CLASS <span>F4</span>
+        •
+        SMAN 2 ENOK
+    </p>
+
+</main>
+
+</body>
+</html>

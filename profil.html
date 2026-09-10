@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Profil Siswa • F4 SMAN 2 Enok</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#71d0ff;--cyan:#55e4d0;--muted:#8fa7bc;--line:rgba(142,217,255,.14)}
+body{min-height:100vh;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#fff;background:radial-gradient(circle at 12% 8%,rgba(55,167,255,.22),transparent 28%),radial-gradient(circle at 90% 85%,rgba(38,227,205,.10),transparent 30%),linear-gradient(145deg,#020813,#071a31 55%,#020b16);padding:20px;display:grid;place-items:center;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:38px 38px}
+.glow{position:fixed;border-radius:50%;filter:blur(50px);pointer-events:none}.g1{width:240px;height:240px;left:-100px;bottom:-80px;background:rgba(0,145,255,.12)}.g2{width:220px;height:220px;right:-80px;top:8%;background:rgba(0,220,190,.08)}
+.card{width:min(720px,100%);position:relative;padding:25px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(145deg,rgba(14,37,62,.80),rgba(6,20,36,.70));box-shadow:0 35px 90px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.08);backdrop-filter:blur(24px);animation:in .65s ease both}
+@keyframes in{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.back{color:#fff;text-decoration:none;border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:14px;padding:10px 14px;font-size:12px}.back:hover{border-color:rgba(113,208,255,.5);transform:translateX(-3px)}.label{font-size:9px;letter-spacing:3px;color:#617a90}
+.head{text-align:center}.avatar-wrap{width:158px;height:158px;margin:7px auto 22px;position:relative;display:grid;place-items:center}.avatar-wrap:before{content:"";position:absolute;inset:-9px;border:1px solid rgba(113,208,255,.45);border-top-color:transparent;border-radius:50%;animation:spin 8s linear infinite}.avatar-wrap:after{content:"";position:absolute;inset:-17px;border:1px dashed rgba(255,255,255,.10);border-radius:50%;animation:spin 14s linear infinite reverse}@keyframes spin{to{transform:rotate(360deg)}}
+.avatar{width:158px;height:158px;border-radius:50%;display:grid;place-items:center;font-size:70px;border:4px solid rgba(255,255,255,.16);background:radial-gradient(circle at 35% 25%,rgba(113,208,255,.23),rgba(255,255,255,.035));box-shadow:0 20px 50px rgba(0,0,0,.38)}
+.kicker{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#6f879b}.name{font-size:clamp(25px,5vw,40px);margin-top:8px;line-height:1.12;font-weight:900;background:linear-gradient(100deg,#fff,#8bdcff,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}.call{margin-top:8px;color:#8197aa;font-size:13px}.call b{color:var(--blue)}
+.divider{height:1px;width:110px;margin:24px auto;background:linear-gradient(90deg,transparent,var(--blue),transparent)}
+.info{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.item{padding:16px;border:1px solid rgba(142,217,255,.10);border-radius:18px;background:rgba(255,255,255,.045)}.item.full{grid-column:1/-1}.label2{display:block;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#617a90;margin-bottom:6px}.value{font-size:13px;font-weight:600;line-height:1.45}.blue{color:#8bdcff}.privacy{margin-top:12px;padding:13px 15px;border-radius:16px;border:1px solid rgba(85,228,208,.12);background:rgba(85,228,208,.045);color:#7891a4;font-size:10px;line-height:1.6;text-align:center}
+.motto{margin-top:14px;padding:22px;border:1px solid rgba(113,208,255,.13);border-radius:20px;text-align:center;background:linear-gradient(120deg,rgba(113,208,255,.09),rgba(85,228,208,.045))}.motto small{color:#688096;letter-spacing:3px;text-transform:uppercase}.motto p{margin-top:8px;color:#a4ddfa;font-size:16px;line-height:1.6;font-style:italic}.footer{text-align:center;margin-top:20px;color:#496074;font-size:9px;letter-spacing:3px}.footer b{color:#67c9ff}
+.notfound{text-align:center;padding:40px}.notfound h2{margin-bottom:8px}.notfound p{color:#71889c;margin-bottom:20px}
+@media(max-width:600px){body{padding:12px;align-items:start}.card{padding:20px 16px;border-radius:27px;margin-top:8px}.label{display:none}.avatar-wrap,.avatar{width:126px;height:126px}.avatar{font-size:56px}.info{grid-template-columns:1fr}.item.full{grid-column:auto}.name{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+<main class="card" id="app"></main>
+<script>
+const siswa=[
+["ADE SUBAGYO","Jio Tamfan","Putra","Renang, joging, voli","Pengusaha","Jangan pernah menyerah sebelum mencoba"],
+["ADINDA RAMONA SARI","Dinda Kiyowo","Putri","Drawing dan dance","Pengacara","Jadilah versi terbaik dari dirimu sendiri"],
+["ALFIN JUANDA SAPUTRA","Alpin","Putra","Touring","-","Mimpi tidak akan menjadi kenyataan tanpa kerja keras"],
+["AULIA ZAHRA","Zahra","Putri","Futsal, voli","-","Kamu lebih kuat dari yang kamu kira"],
+["CINTA SYAFIKA PUTRI","Cinta","Putri","Main sepeda","-","Kegagalan adalah awal dari kesuksesan"],
+["DAFFA HABIBIE ZIKRILLAH","Dapa/Dafa","Putra","Futsal","Joki Drag","Percaya pada proses"],
+["DINDA NOVIRA","Dinda Gemes","Putri","Dengar musik","Pembalap Girl","Hari ini lebih baik dari kemarin"],
+["FATHURRAHMAN","Patuy","Putra","Futsal, voli","Pengusaha","Sukses adalah milik mereka yang terus berusaha"],
+["HAIFA AMIRA","Mira","Putri","Futsal, badminton, running","Kuliah di Itebe","Kerja keras hari ini, hasil manis di masa depan"],
+["HERIAN SABINO","Iyan","Putra","Main game","Dokter","Jangan takut gagal, takutlah untuk tidak mencoba"],
+["INDRI NURMAYA SUCI","Indri","Putri","Nonton","Guru/Apoteker","Konsistensi adalah kunci keberhasilan"],
+["LILA PINTAN NUGRAHI","Lilac","Putri","Masak, jalan-jalan","-","Bermimpilah setinggi langit"],
+["M. MAULANA FAJRI","DG Mapatca'","Putra","Voli","Mine Plan Engineer","Setiap hari adalah kesempatan baru"],
+["M. RENDRA HIDAYATULLAH","Rendra/Enda","Putra","Voli","-","Jadilah pribadi yang bermanfaat"],
+["MAHDALENA","Lena","Putri","Main game, badminton","Dokter","Kesuksesan dimulai dari keberanian"],
+["MELSA PUTRI LIEGA","Samel","Putri","Berkebun","Kowal","Tetaplah rendah hati, tetaplah semangat"],
+["MUHAMMAD ARDIANSYAH","Ardi","Putra","Futsal, badminton","Pengusaha","Bukan tentang seberapa cepat, tapi seberapa konsisten"],
+["MUHAMMAD HANAPI","Hanapi","Putra","Biliar","TNI","Kamu adalah pahlawan dalam hidupmu sendiri"],
+["NABIL AUFA SATRIAJI","Nabil","Putra","Tenis meja, golf","Pilot","Hidup adalah tentang memberi makna"],
+["NABILA RAHMANDA","Bila/Bilbil","Putri","Membaca","Psikolog","Jangan bandingkan perjalananmu dengan orang lain"],
+["NABILLA AZZAHRA","Abil","Putri","Baca Al-Qur'an","Financial Freedom","Jika kamu tidak bisa mengambil risiko, kamu tidak akan pergi ke mana pun"],
+["NIA RAHMADANI","Anya Cantik","Putri","Nonton","Perawat","Setiap langkah kecil itu berarti"],
+["NUR HAFIZAH HANIF","Hanif (Hamik/Mik)","Putri","Nonton, traveling","Psikolog","Kebahagiaan adalah ketika kamu memberi"],
+["NURASSYIFA ARRIZQI","Syifa","Putri","Menggambar","Dokter","Jadilah alasan bagi senyuman orang lain"],
+["PUTRI NUR ADELIA","Putri","Putri","Masak, buat kue","Bidan","Fokus pada tujuan, bukan hambatan"],
+["RAMADHANI AGUSTINA","Hani","Putri","Menonton, membaca","Dokter","Yakinlah pada kemampuan diri sendiri"],
+["REZA OKTA ARIANA","Eja","Putri","Masak (eksperimen)","Tour Guide","Keberhasilan adalah hasil dari kegigihan"],
+["RIFATUL AKBAR","Abay","Putra","Futsal","Pengusaha","Jangan pernah berhenti untuk belajar"],
+["RIZQI TAUFIQURAHMAN","Topek/Iki","Putra","Futsal dan sepak bola","Damkar/Bomber","Percaya bahwa kamu bisa"],
+["TIARA SAFITRI","Tiara","Putri","Masak","Dokter/Bidan","Masa depan milik mereka yang berani"],
+["ULFA AULIA","Lia istrinya ddkeonho","Putri","Main game, masak","Dokter","Semangat pagi, semangat hidup"],
+["USMA LUNA","Luna","Putri","Nonton","Dokter (maybe)","Hidup cuma sekali, lakukan yang terbaik"],
+["WITA","Thaa","Putri","Buat kue","Psikolog","Menjadi pribadi yang lebih baik setiap hari"],
+["ZAHWA SASABILA","Zahwa","Putri","Masak","Dokter","Berbuat baiklah, niscaya kebaikan kembali"],
+["ICA","Ica","Putri","-","-","-"]
+];
+const id=parseInt(new URLSearchParams(location.search).get("id"))||0,s=siswa[id-1],app=document.getElementById("app");
+if(!s){app.innerHTML=`<div class="notfound"><h2>😕 Profil tidak ditemukan</h2><p>Gunakan tautan dari halaman anggota.</p><a class="back" href="anggota.html">← Kembali ke Anggota</a></div>`}
+else{const [nama,panggilan,jk,hobi,cita,motto]=s;app.innerHTML=`
+<div class="top"><a class="back" href="anggota.html">← Anggota</a><div class="label">F4 • PROFILE</div></div>
+<section class="head"><div class="avatar-wrap"><div class="avatar">${jk==="Putra"?"👦":"👧"}</div></div><div class="kicker">Student Profile</div><h1 class="name">${nama}</h1><div class="call">👋 Dipanggil <b>${panggilan}</b></div></section>
+<div class="divider"></div>
+<section class="info">
+<div class="item"><span class="label2">Jenis Kelamin</span><span class="value ${jk==="Putra"?"blue":""}">${jk}</span></div>
+<div class="item"><span class="label2">Hobi</span><span class="value">${hobi}</span></div>
+<div class="item full"><span class="label2">Cita-Cita</span><span class="value blue">${cita}</span></div>
+</section>
+<div class="privacy">🔒 Data pribadi sensitif seperti NIK, NISN, tanggal lahir lengkap, dan alamat tidak ditampilkan pada halaman publik.</div>
+<section class="motto"><small>✦ Motto Hidup ✦</small><p>"${motto}"</p></section>
+<div class="footer">CLASS <b>F4</b> • SMAN 2 ENOK</div>`}
+</script>
+</body>
+</html>
