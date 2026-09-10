@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>Petugas Upacara • F4 SMAN 2 Enok</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#030914;
+    --bg2:#071a2d;
+    --line:rgba(255,220,140,.14);
+    --white:#f7fbff;
+    --muted:#a9b8c8;
+    --gold:#fdcb6e;
+    --gold-light:#ffdf9e;
+    --orange:#e67e22;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    padding:22px;
+    color:var(--white);
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:
+        radial-gradient(circle at 5% 0%,rgba(253,203,110,.18),transparent 30%),
+        radial-gradient(circle at 95% 80%,rgba(230,126,34,.11),transparent 28%),
+        linear-gradient(145deg,var(--bg),var(--bg2) 55%,#3d2606);
+    overflow-x:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* POLA BACKGROUND */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.20;
+    background-image:
+        radial-gradient(rgba(255,255,255,.7) .7px,transparent .7px);
+    background-size:32px 32px;
+    z-index:0;
+}
+
+/* ORB */
+.orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(80px);
+    pointer-events:none;
+    z-index:0;
+}
+
+.orb.one{
+    width:320px;
+    height:320px;
+    left:-150px;
+    top:-100px;
+    background:rgba(253,203,110,.16);
+}
+
+.orb.two{
+    width:250px;
+    height:250px;
+    right:-100px;
+    bottom:-80px;
+    background:rgba(230,126,34,.12);
+}
+
+/* CONTAINER */
+.container{
+    width:min(720px,100%);
+    margin:auto;
+    position:relative;
+    z-index:1;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:48px;
+    height:48px;
+    display:grid;
+    place-items:center;
+    border-radius:16px;
+    font-size:14px;
+    font-weight:900;
+    background:linear-gradient(145deg,#7a5418,#3d2606);
+    border:1px solid rgba(255,220,140,.28);
+    box-shadow:0 12px 35px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.13);
+}
+
+.eyebrow{
+    color:var(--gold-light);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+}
+
+.brand b{
+    font-size:14px;
+    letter-spacing:.4px;
+}
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 15px;
+    color:#fff5e0;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:750;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.045);
+    backdrop-filter:blur(14px);
+    transition:.25s;
+}
+
+.back:hover{
+    transform:translateY(-2px);
+    background:rgba(253,203,110,.12);
+    border-color:rgba(253,203,110,.4);
+}
+
+/* =========================
+   PANEL UTAMA
+========================= */
+.panel{
+    padding:70px 45px;
+    border-radius:35px;
+    border:1px solid var(--line);
+    background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.02));
+    box-shadow:0 30px 90px rgba(0,0,0,.45);
+    backdrop-filter:blur(22px);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Glow di dalam panel */
+.panel::before{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    top:-200px;
+    right:-200px;
+    background:radial-gradient(circle,rgba(253,203,110,.15),transparent 70%);
+    pointer-events:none;
+}
+
+/* =========================
+   ICON BESAR
+========================= */
+.big-icon{
+    font-size:100px;
+    margin-bottom:30px;
+    display:block;
+    filter:drop-shadow(0 10px 30px rgba(253,203,110,.4));
+    animation:float 3s ease-in-out infinite;
+    position:relative;
+    z-index:1;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+}
+
+/* =========================
+   TITLE
+========================= */
+.title{
+    font-size:clamp(30px,5vw,46px);
+    font-weight:900;
+    letter-spacing:-1px;
+    line-height:1.1;
+    margin-bottom:25px;
+    position:relative;
+    z-index:1;
+}
+
+.title span{
+    background:linear-gradient(95deg,#ffffff 15%,#ffdf9e 55%,#fdcb6e 95%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+/* =========================
+   PESAN BESAR
+========================= */
+.big-message{
+    font-size:clamp(22px,3.5vw,32px);
+    font-weight:700;
+    line-height:1.6;
+    color:#fff5e0;
+    margin:0 auto;
+    max-width:600px;
+    position:relative;
+    z-index:1;
+    padding:0 10px;
+}
+
+.big-message .highlight{
+    background:linear-gradient(95deg,#ffdf9e,#fdcb6e);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    font-weight:900;
+}
+
+.big-message .emoji{
+    display:inline-block;
+    font-size:1.2em;
+    vertical-align:middle;
+    animation:wink 2s ease-in-out infinite;
+}
+
+@keyframes wink{
+    0%,90%,100%{transform:scale(1);}
+    95%{transform:scale(1.15) rotate(10deg);}
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer{
+    margin-top:30px;
+    text-align:center;
+    color:rgba(255,230,180,.34);
+    font-size:10px;
+    letter-spacing:3px;
+}
+
+.footer span{
+    color:var(--gold-light);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:600px){
+    body{
+        padding:15px;
+    }
+
+    .panel{
+        padding:50px 25px;
+        border-radius:28px;
+    }
+
+    .big-icon{
+        font-size:75px;
+        margin-bottom:22px;
+    }
+
+    .title{
+        font-size:26px;
+        margin-bottom:18px;
+    }
+
+    .big-message{
+        font-size:19px;
+        line-height:1.7;
+    }
+}
+
+@media(max-width:390px){
+    .logo{
+        width:43px;
+        height:43px;
+    }
+
+    .brand b{
+        font-size:12px;
+    }
+
+    .back{
+        padding:9px 11px;
+    }
+
+    .panel{
+        padding:40px 18px;
+    }
+
+    .big-icon{
+        font-size:65px;
+    }
+
+    .title{
+        font-size:22px;
+    }
+
+    .big-message{
+        font-size:17px;
+    }
+}
+
+@media(max-height:500px) and (orientation:landscape){
+    body{
+        align-items:flex-start;
+        padding:15px;
+    }
+
+    .panel{
+        padding:35px 30px;
+    }
+
+    .big-icon{
+        font-size:60px;
+        margin-bottom:15px;
+    }
+
+    .title{
+        font-size:24px;
+        margin-bottom:15px;
+    }
+
+    .big-message{
+        font-size:17px;
+        line-height:1.6;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+
+<div class="container">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="logo">F4</div>
+            <div>
+                <div class="eyebrow">Class Activity</div>
+                <b>SMAN 2 ENOK</b>
+            </div>
+        </div>
+
+        <a href="kegiatan.html" class="back">← Kegiatan</a>
+    </header>
+
+
+    <!-- PANEL UTAMA -->
+    <main class="panel">
+
+        <!-- ICON -->
+        <span class="big-icon">🏛️</span>
+
+
+        <!-- TITLE -->
+        <h1 class="title">
+            <span>Petugas Upacara</span>
+        </h1>
+
+
+        <!-- PESAN BESAR -->
+        <p class="big-message">
+            Ngak ada foto-fotonya kan kemarin ngak sempat
+            mau foto-foto, <span class="highlight">lain kali wajib
+            foto-fotonya</span> biar bisa dimasukkan ke sini
+            <span class="emoji">📸</span>
+        </p>
+
+    </main>
+
+
+    <div class="footer">
+        F4 • SMAN 2 ENOK • <span>PETUGAS UPACARA</span>
+    </div>
+
+</div>
+
+</body>
+</html>
