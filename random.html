@@ -15,7 +15,6 @@
 :root{
     --bg:#030914;
     --bg2:#071a2d;
-    --card:rgba(10,28,49,.72);
     --line:rgba(150,255,200,.14);
     --white:#f7fbff;
     --muted:#91a9bd;
@@ -40,7 +39,6 @@ body{
     overflow-x:hidden;
 }
 
-/* POLA BACKGROUND */
 body::before{
     content:"";
     position:fixed;
@@ -53,7 +51,6 @@ body::before{
     z-index:0;
 }
 
-/* ORB */
 .orb{
     position:fixed;
     border-radius:50%;
@@ -78,7 +75,6 @@ body::before{
     background:rgba(92,227,208,.12);
 }
 
-/* CONTAINER */
 .container{
     width:min(1000px,100%);
     margin:auto;
@@ -86,9 +82,7 @@ body::before{
     z-index:1;
 }
 
-/* =========================
-   TOPBAR
-========================= */
+/* TOPBAR */
 .topbar{
     display:flex;
     justify-content:space-between;
@@ -150,9 +144,7 @@ body::before{
     border-color:rgba(46,204,113,.4);
 }
 
-/* =========================
-   HERO
-========================= */
+/* HERO */
 .hero{
     padding:70px 2px 35px;
     display:grid;
@@ -184,7 +176,6 @@ body::before{
     line-height:1.8;
 }
 
-/* STAT */
 .stat{
     min-width:145px;
     padding:18px 20px;
@@ -211,9 +202,7 @@ body::before{
     letter-spacing:1.5px;
 }
 
-/* =========================
-   PANEL
-========================= */
+/* PANEL */
 .panel{
     padding:22px;
     border-radius:30px;
@@ -247,9 +236,7 @@ body::before{
     background:rgba(46,204,113,.08);
 }
 
-/* =========================
-   GALERI FOTO
-========================= */
+/* GALERI FOTO */
 .galeri{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -268,22 +255,15 @@ body::before{
     animation:fadeUp .6s ease backwards;
 }
 
-.foto-item:nth-child(1){animation-delay:.05s;}
-.foto-item:nth-child(2){animation-delay:.1s;}
-.foto-item:nth-child(3){animation-delay:.15s;}
-.foto-item:nth-child(4){animation-delay:.2s;}
-.foto-item:nth-child(5){animation-delay:.25s;}
-.foto-item:nth-child(6){animation-delay:.3s;}
-
-@keyframes fadeUp{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;transform:translateY(0);}
-}
-
 .foto-item:hover{
     transform:translateY(-5px) scale(1.03);
     border-color:rgba(46,204,113,.55);
     box-shadow:0 20px 45px rgba(46,204,113,.35),0 0 30px rgba(94,232,160,.2);
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
 }
 
 .foto-item img{
@@ -352,9 +332,91 @@ body::before{
     color:rgba(255,255,255,.25);
 }
 
-/* =========================
-   EMPTY STATE
-========================= */
+/* GALERI VIDEO */
+.video-section{
+    margin-top:28px;
+}
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.video-item{
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:18px;
+    background:#02070d;
+    border:1.5px solid rgba(255,255,255,.09);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.video-item:hover{
+    transform:translateY(-4px);
+    border-color:rgba(46,204,113,.5);
+    box-shadow:0 20px 45px rgba(0,0,0,.4),0 0 30px rgba(46,204,113,.15);
+}
+
+.video-item video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    opacity:.7;
+    pointer-events:none;
+    transition:.4s;
+}
+
+.video-item:hover video{
+    opacity:.9;
+    transform:scale(1.03);
+}
+
+.video-item .video-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.7),transparent 60%);
+    pointer-events:none;
+}
+
+.video-item .video-num{
+    position:absolute;
+    left:10px;
+    bottom:9px;
+    z-index:2;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.2px;
+    color:#fff;
+    text-shadow:0 2px 8px rgba(0,0,0,.5);
+}
+
+.video-item .play-small{
+    position:absolute;
+    right:10px;
+    top:10px;
+    width:36px;
+    height:36px;
+    display:grid;
+    place-items:center;
+    padding-left:2px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#1fa355,#27bdae);
+    color:white;
+    font-size:14px;
+    box-shadow:0 8px 20px rgba(31,163,85,.4);
+    z-index:3;
+    transition:.3s;
+}
+
+.video-item:hover .play-small{
+    transform:scale(1.15);
+}
+
+/* EMPTY */
 .empty-video{
     padding:40px 20px;
     text-align:center;
@@ -381,9 +443,7 @@ body::before{
     color:rgba(255,255,255,.35);
 }
 
-/* =========================
-   NOTE
-========================= */
+/* NOTE */
 .note{
     margin-top:15px;
     padding:14px 17px;
@@ -401,9 +461,7 @@ body::before{
     font-weight:600;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 .footer{
     margin-top:18px;
     padding-bottom:5px;
@@ -413,9 +471,7 @@ body::before{
     letter-spacing:2px;
 }
 
-/* =========================
-   MODAL
-========================= */
+/* MODAL */
 .modal{
     display:none;
     position:fixed;
@@ -512,9 +568,20 @@ body::before{
     50%{opacity:1;}
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.modal-video-wrapper{
+    width:min(1100px,100%);
+}
+
+.modal-video-wrapper video{
+    width:100%;
+    max-height:88vh;
+    display:block;
+    border-radius:14px;
+    background:#000;
+    box-shadow:0 25px 70px rgba(0,0,0,.8);
+}
+
+/* RESPONSIVE */
 @media(max-width:800px){
     .galeri{
         grid-template-columns:repeat(3,1fr);
@@ -525,6 +592,9 @@ body::before{
     .stat{
         width:max-content;
         text-align:left;
+    }
+    .video-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
@@ -557,11 +627,9 @@ body::before{
         font-size:9px;
         bottom:13px;
     }
-    .empty-video{
-        padding:30px 15px;
-    }
-    .empty-video .icon{
-        font-size:36px;
+    .video-grid{
+        grid-template-columns:1fr;
+        gap:10px;
     }
 }
 
@@ -594,6 +662,9 @@ body::before{
     }
     .galeri{
         grid-template-columns:repeat(5,1fr);
+    }
+    .video-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 }
 </style>
@@ -638,7 +709,7 @@ body::before{
         </div>
 
         <div class="stat">
-            <strong id="statFoto">06</strong>
+            <strong id="statFoto">13</strong>
             <span>PHOTO MOMENTS</span>
         </div>
     </section>
@@ -656,14 +727,14 @@ body::before{
         <div class="galeri" id="galeriFoto"></div>
 
 
-        <!-- VIDEO (KOSONG SEMENTARA) -->
-        <section style="margin-top:28px;">
+        <!-- VIDEO -->
+        <section class="video-section">
             <div class="section-head">
                 <h2>🎥 Video</h2>
-                <div class="badge" id="badgeVideo">0 VIDEO</div>
+                <div class="badge" id="badgeVideo">11 VIDEO</div>
             </div>
 
-            <div id="galeriVideo"></div>
+            <div class="video-grid" id="galeriVideo"></div>
         </section>
 
 
@@ -693,11 +764,22 @@ body::before{
     </div>
 </div>
 
+<!-- MODAL VIDEO -->
+<div class="modal" id="modalVideo">
+    <button class="modal-close" onclick="tutupModalVideo()">✕</button>
+    <div class="modal-video-wrapper">
+        <video id="modalVideoPlayer" controls playsinline preload="metadata">
+            <source id="modalVideoSource" src="" type="video/mp4">
+            Browser tidak mendukung video.
+        </video>
+    </div>
+</div>
+
 
 <script>
 
 /* =========================
-   DATA FOTO (6 FOTO)
+   DATA FOTO (13 FOTO)
 ========================= */
 const fotoRandom = [
     { src:"random1.jpg", alt:"Foto random 1" },
@@ -705,13 +787,32 @@ const fotoRandom = [
     { src:"random3.jpg", alt:"Foto random 3" },
     { src:"random4.jpg", alt:"Foto random 4" },
     { src:"random5.jpg", alt:"Foto random 5" },
-    { src:"random6.jpg", alt:"Foto random 6" }
+    { src:"random6.jpg", alt:"Foto random 6" },
+    { src:"random7.jpg", alt:"Foto random 7" },
+    { src:"random8.jpg", alt:"Foto random 8" },
+    { src:"random9.jpg", alt:"Foto random 9" },
+    { src:"random10.jpg", alt:"Foto random 10" },
+    { src:"random11.jpg", alt:"Foto random 11" },
+    { src:"random12.jpg", alt:"Foto random 12" },
+    { src:"random13.jpg", alt:"Foto random 13" }
 ];
 
 /* =========================
-   DATA VIDEO (BELUM ADA)
+   DATA VIDEO (11 VIDEO)
 ========================= */
-const videoRandom = [];
+const videoRandom = [
+    { src:"random1.mp4", alt:"Video random 1" },
+    { src:"random2.mp4", alt:"Video random 2" },
+    { src:"random3.mp4", alt:"Video random 3" },
+    { src:"random4.mp4", alt:"Video random 4" },
+    { src:"random5.mp4", alt:"Video random 5" },
+    { src:"random6.mp4", alt:"Video random 6" },
+    { src:"random7.mp4", alt:"Video random 7" },
+    { src:"random8.mp4", alt:"Video random 8" },
+    { src:"random9.mp4", alt:"Video random 9" },
+    { src:"random10.mp4", alt:"Video random 10" },
+    { src:"random11.mp4", alt:"Video random 11" }
+];
 
 
 /* =========================
@@ -772,20 +873,20 @@ fotoRandom.forEach((foto,index)=>{
 
 
 /* =========================
-   TAMPILKAN VIDEO (EMPTY STATE)
+   TAMPILKAN VIDEO
 ========================= */
 const galeriVideo = document.getElementById("galeriVideo");
 
 if(videoRandom.length === 0){
     galeriVideo.innerHTML = `
-        <div class="empty-video">
+        <div class="empty-video" style="grid-column:1/-1">
             <div class="icon">🎥</div>
             <h3>Belum Ada Video</h3>
             <p>Video momen random F4 akan segera ditambahkan</p>
         </div>
     `;
 } else {
-    videoRandom.forEach(video=>{
+    videoRandom.forEach((video,index)=>{
         const item = document.createElement("div");
         item.className = "video-item";
         item.onclick = () => bukaModalVideo(video.src);
@@ -797,13 +898,11 @@ if(videoRandom.length === 0){
 
             <div class="video-overlay"></div>
 
-            <div class="video-info">
-                <small>F4 • VIDEO</small>
-                <h3>Momen Random F4</h3>
-                <p>Klik untuk membuka video</p>
+            <div class="video-num">
+                VIDEO ${String(index+1).padStart(2,"0")}
             </div>
 
-            <div class="play-btn">▶</div>
+            <div class="play-small">▶</div>
         `;
 
         galeriVideo.appendChild(item);
@@ -925,7 +1024,7 @@ fotoWrapper.addEventListener("mouseup", () => { isDragging = false; });
 fotoWrapper.addEventListener("mouseleave", () => { isDragging = false; });
 
 modalImg.addEventListener("dblclick", () => {
-       if(scale > 1){ resetZoom(); }
+    if(scale > 1){ resetZoom(); }
     else { scale = 2; updateTransform(); }
 });
 
@@ -933,27 +1032,39 @@ modalImg.addEventListener("dblclick", () => {
 /* =========================
    MODAL VIDEO
 ========================= */
+const modalVideo = document.getElementById("modalVideo");
+const player = document.getElementById("modalVideoPlayer");
+const source = document.getElementById("modalVideoSource");
+
 function bukaModalVideo(src){
-    // Akan dipakai kalau video udah ada
-    console.log("Buka video:", src);
+    source.src = src;
+    player.load();
+    modalVideo.classList.add("active");
+    document.body.style.overflow = "hidden";
+    setTimeout(() => {
+        player.play().catch(err => console.log("Autoplay dicegah:", err));
+    }, 150);
 }
 
 function tutupModalVideo(){
-    // Akan dipakai kalau video udah ada
+    player.pause();
+    player.currentTime = 0;
+    modalVideo.classList.remove("active");
+    document.body.style.overflow = "";
 }
 
 
 /* =========================
-   KLIK BACKGROUND
+   KLIK BACKGROUND & ESCAPE
 ========================= */
 modalFoto.addEventListener("click", e => {
     if(e.target === modalFoto) tutupModalFoto();
 });
 
+modalVideo.addEventListener("click", e => {
+    if(e.target === modalVideo) tutupModalVideo();
+});
 
-/* =========================
-   ESCAPE
-========================= */
 document.addEventListener("keydown", e => {
     if(e.key === "Escape"){
         tutupModalFoto();
